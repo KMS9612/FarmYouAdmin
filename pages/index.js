@@ -5,8 +5,8 @@ import { useRecoilState } from "recoil";
 import * as S from "../src/component/units/login/login.styles";
 import { TokenState } from "../src/commons/store/index";
 const LOGIN = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password)
+  mutation login($email: String!, $password: String!, $userType: String!) {
+    login(email: $email, password: $password, userType: $userType)
   }
 `;
 export default function Home() {
@@ -14,19 +14,16 @@ export default function Home() {
   const router = useRouter();
   const [login] = useMutation(LOGIN);
   const onClickLogin = async (data) => {
-    try {
-      const result = await login({
-        variables: {
-          email: String(data.email),
-          password: String(data.password),
-        },
-      });
+    const result = await login({
+      variables: {
+        email: data.email,
+        password: data.password,
+        userType: "user",
+      },
+    });
 
-      router.push(`/admin_create`);
-      setAccessToken(result.data?.login);
-    } catch (error) {
-      console.log(error);
-    }
+    router.push(`/admin_create`);
+    setAccessToken(result.data?.login);
   };
 
   const { handleSubmit, register } = useForm({

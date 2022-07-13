@@ -10,7 +10,8 @@ export const Wrapper = styled.div`
 `;
 export const HeaderWrapper = styled.div`
   width: 100%;
-  height: 60px;
+  height: 90px;
+  padding-top: 10px;
   justify-content: space-between;
   display: flex;
   flex-direction: column;
@@ -24,6 +25,10 @@ export const LogOutBtn = styled.button`
   width: 115px;
   border: 1px solid #bdbdbd;
   border-radius: 5px;
+  &:hover {
+    border: 1px solid #f6651e;
+    color: #f6651e;
+  }
 `;
 export const DevideLine = styled.div`
   border-top: 1px solid #bdbdbd;
@@ -44,4 +49,9 @@ export const Nav = styled.div`
   justify-content: center;
   height: 30px;
   margin-bottom: 10px;
+  cursor: pointer;
+  &:hover {
+    border: 1px solid #f6651e;
+    color: #f6651e;
+  }
 `;

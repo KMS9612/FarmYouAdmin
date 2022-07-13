@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 150px;
   border-bottom: 1px solid #f6651e;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 `;
 export const Header = styled.div`
   color: #f6651e;
