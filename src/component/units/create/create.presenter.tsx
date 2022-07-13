@@ -4,7 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import ButtonComponent from "../../../commons/buttons";
 import InputComponent from "../../../commons/inputs";
 
-export default function CreateUI() {
+export default function CreateUI(props) {
   return (
     <S.Wrapper>
       <S.InnerWrapper>
@@ -14,7 +14,8 @@ export default function CreateUI() {
           </S.ImageItem>
         </S.ImageItemWrapper>
         <S.Label>상품명</S.Label>
-        <InputComponent placeholder={"상품명을 입력해주세요."} type={"text"} />
+
+        <InputComponent placeholder={props.accessToken} type={"text"} />
         <S.FormWrapper>
           <S.InputWrapper>
             <S.Label>상품가격</S.Label>
