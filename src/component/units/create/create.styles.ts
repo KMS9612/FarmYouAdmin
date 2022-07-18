@@ -2,11 +2,27 @@ import styled from "@emotion/styled";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
+
+export const Header = styled.div`
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+`;
+
+export const CategoryWrapper = styled.div`
+  width: 100%;
+`;
+export const Category = styled.select`
+  width: 25%;
+  height: 30px;
+`;
+export const CategorySelect = styled.option``;
+
 export const InnerWrapper = styled.div`
   width: 80%;
   margin: 0px auto;

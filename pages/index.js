@@ -4,26 +4,30 @@ import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import * as S from "../src/component/units/login/login.styles";
 import { TokenState } from "../src/commons/store/index";
-const LOGIN = gql`
-  mutation login($email: String!, $password: String!, $userType: String!) {
-    login(email: $email, password: $password, userType: $userType)
+import { Modal } from "antd";
+const LOGIN_ADMIN = gql`
+  mutation loginAdmin($email: String!, $password: String!) {
+    loginAdmin(email: $email, password: $password)
   }
 `;
 export default function Home() {
   const [accessToken, setAccessToken] = useRecoilState(TokenState);
   const router = useRouter();
-  const [login] = useMutation(LOGIN);
+  const [loginAdmin] = useMutation(LOGIN_ADMIN);
   const onClickLogin = async (data) => {
-    const result = await login({
-      variables: {
-        email: data.email,
-        password: data.password,
-        userType: "user",
-      },
-    });
+    try {
+      const result = await loginAdmin({
+        variables: {
+          email: data.email,
+          password: data.password,
+        },
+      });
 
-    router.push(`/admin_create`);
-    setAccessToken(result.data?.login);
+      router.push(`/admin_orders`);
+      setAccessToken(result.data?.loginAdmin);
+    } catch (e) {
+      Modal.error({ content: e.message });
+    }
   };
 
   const { handleSubmit, register } = useForm({

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Table = styled.div`
   width: 100%;
-  border: 1px solid skyblue;
+
   display: flex;
   flex-direction: row;
   background-color: #fff;
