@@ -10,6 +10,14 @@ const LOGIN_ADMIN = gql`
     loginAdmin(email: $email, password: $password)
   }
 `;
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      id
+      type
+    }
+  }
+`;
 export default function Home() {
   const [accessToken, setAccessToken] = useRecoilState(TokenState);
   const router = useRouter();
@@ -41,12 +49,12 @@ export default function Home() {
           <S.Login
             autoFocus={true}
             type="text"
-            placeholder="아이디를 입력해주세요"
+            placeholder="어드민 아이디를 입력해주세요"
             {...register("email")}
           ></S.Login>
           <S.PassWord
             type="password"
-            placeholder="비밀번호를 입력해주세요"
+            placeholder="어드민 비밀번호를 입력해주세요"
             {...register("password")}
           ></S.PassWord>
         </S.LoginForm>

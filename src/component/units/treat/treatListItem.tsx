@@ -14,6 +14,14 @@ export const Table = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  &:hover {
+    background-color: #ccc;
+  }
+`;
+const Img = styled.img`
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
 `;
 export const TableCate = styled.div`
   border: 1px solid #000;
@@ -47,24 +55,16 @@ export const IconWrapper = styled.div`
   align-items: center;
 `;
 
-export default function TreatListItem() {
+export default function TreatListItem(props: any) {
   return (
     <Table>
-      <TableCate>상품 카테고리</TableCate>
-      <TableProduct>상품 명</TableProduct>
-      <TablePrice>상품 가격</TablePrice>
+      <TableCate>{props.el.categoryId.name}</TableCate>
+      <TableProduct>{props.el.title}</TableProduct>
+      <TablePrice>{props.el.price} 원</TablePrice>
       <TableIcons>
         <IconWrapper>
-          <img
-            style={{ width: "15px", height: "15px" }}
-            src="/icons/treat/AdminEdit.png"
-            alt="수정버튼"
-          ></img>
-          <img
-            style={{ width: "15px", height: "15px" }}
-            src="/icons/treat/AdminDelete.png"
-            alt="삭제버튼"
-          ></img>
+          <Img src="/icons/treat/AdminEdit.png" alt="수정버튼"></Img>
+          <Img src="/icons/treat/AdminDelete.png" alt="삭제버튼"></Img>
         </IconWrapper>
       </TableIcons>
     </Table>

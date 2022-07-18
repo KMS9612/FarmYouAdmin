@@ -2,7 +2,7 @@
 import * as S from "./treat.styles";
 import TreatListItem from "./treatListItem";
 
-export default function AdminTreatUI() {
+export default function AdminTreatUI(props: any) {
   return (
     <S.Wrapper>
       <S.Header>상품관리</S.Header>
@@ -25,11 +25,11 @@ export default function AdminTreatUI() {
           </S.IconWrapper>
         </S.TableIcons>
       </S.Table>
-      <TreatListItem />
-      <TreatListItem />
-      <TreatListItem />
-      <TreatListItem />
-      <TreatListItem />
+      {props.data?.fetchDirectProductsByDirectStoreId.map(
+        (el: any, index: string) => (
+          <TreatListItem key={index} el={el} />
+        )
+      )}
     </S.Wrapper>
   );
 }

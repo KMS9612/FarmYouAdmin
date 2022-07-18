@@ -12,7 +12,9 @@ export const Header = styled.div`
   font-weight: 700;
 `;
 export const Table = styled.div`
-  background-color: #bdbdbd;
+  background-color: #f5561e;
+  color: #fff;
+  font-weight: 700;
   width: 100%;
   display: flex;
   flex-direction: row;
