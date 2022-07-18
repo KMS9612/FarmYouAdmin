@@ -1,4 +1,4 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
@@ -10,18 +10,12 @@ const LOGIN_ADMIN = gql`
     loginAdmin(email: $email, password: $password)
   }
 `;
-const FETCH_USER_LOGGED_IN = gql`
-  query fetchUserLoggedIn {
-    fetchUserLoggedIn {
-      id
-      type
-    }
-  }
-`;
+
 export default function Home() {
   const [accessToken, setAccessToken] = useRecoilState(TokenState);
   const router = useRouter();
   const [loginAdmin] = useMutation(LOGIN_ADMIN);
+
   const onClickLogin = async (data) => {
     try {
       const result = await loginAdmin({

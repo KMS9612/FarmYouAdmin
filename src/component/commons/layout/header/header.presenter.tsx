@@ -10,7 +10,7 @@ export default function HeaderLayoutUI() {
   useEffect(() => {
     myTimer = setInterval(() => {
       setTimer(moment());
-    }, 1000);
+    }, 30000);
     return () => {
       clearInterval(myTimer);
     };
@@ -21,7 +21,7 @@ export default function HeaderLayoutUI() {
       <S.HeaderWrapper>
         <S.Header>FarmYou Admin Console</S.Header>
         <S.Date>{timer.format("YYYY-MM-DD")}</S.Date>
-        <S.Time>{timer.format("HH:mm:ss")}</S.Time>
+        <S.Time>{timer.format("HH:mm")}</S.Time>
       </S.HeaderWrapper>
     </S.Wrapper>
   );

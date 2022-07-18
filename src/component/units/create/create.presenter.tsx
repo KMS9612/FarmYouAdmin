@@ -23,9 +23,11 @@ export default function CreateUI(props: any) {
             style={{ width: "25%" }}
             defaultValue="카테고리를 선택하세요"
           >
-            <Option value="근채류">근채류</Option>
-            <Option value="과채류">과채류</Option>
-            <Option value="옆채류">옆채류</Option>
+            {props.CategoryList.map((el: any, index: number) => (
+              <Select.Option key={index} value={el.id}>
+                {el.name}
+              </Select.Option>
+            ))}
           </Select>
         </S.CategoryWrapper>
         <S.Label>상품명</S.Label>
