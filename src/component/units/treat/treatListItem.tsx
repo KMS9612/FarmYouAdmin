@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import { useMutation } from "@apollo/client";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
+import { DELETE_PRODUCT_DIRECT } from "./treat.queries";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -56,15 +59,33 @@ export const IconWrapper = styled.div`
 `;
 
 export default function TreatListItem(props: any) {
+  const router = useRouter();
+  const [deleteProductDirect] = useMutation(DELETE_PRODUCT_DIRECT);
+  const onClickDelete = () => {
+    try {
+      deleteProductDirect({
+        variables: {
+          productId: props.el.id,
+        },
+      });
+      router.push(`/admin_treat`);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
   return (
     <Table>
-      <TableCate>{props.el.categoryId.name}</TableCate>
+      <TableCate>{props.el.category.name}</TableCate>
       <TableProduct>{props.el.title}</TableProduct>
       <TablePrice>{props.el.price} 원</TablePrice>
       <TableIcons>
         <IconWrapper>
           <Img src="/icons/treat/AdminEdit.png" alt="수정버튼"></Img>
-          <Img src="/icons/treat/AdminDelete.png" alt="삭제버튼"></Img>
+          <Img
+            onClick={onClickDelete}
+            src="/icons/treat/AdminDelete.png"
+            alt="삭제버튼"
+          ></Img>
         </IconWrapper>
       </TableIcons>
     </Table>

@@ -6,22 +6,18 @@ export const CREATE_PRODUCT_DIRECT = gql`
     $content: String!
     $price: Float!
     $quantity: Float!
-    $category: String!
+    $categoryId: String!
     $directStoreId: String!
-    $adminId: String!
   ) {
     createProductDirect(
       title: $title
-      content: $contents
+      content: $content
       price: $price
       quantity: $quantity
-      category: $category
+      categoryId: $categoryId
       directStoreId: $directStoreId
-      adminId: $adminId
     ) {
       id
-      name
-      email
     }
   }
 `;
@@ -32,6 +28,10 @@ export const FETCH_USER_LOGGED_IN = gql`
       id
       type
       email
+      directStore {
+        id
+        name
+      }
     }
   }
 `;

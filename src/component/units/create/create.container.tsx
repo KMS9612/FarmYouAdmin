@@ -1,4 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 import { SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import CreateUI from "./create.presenter";
@@ -6,41 +7,41 @@ import { CREATE_PRODUCT_DIRECT, FETCH_USER_LOGGED_IN } from "./create.queries";
 
 const CategoryList = [
   {
-    id: "52b78eb6-0dbb-42ed-8829-7627378e74fa",
+    id: "44cc4424-eb4c-4da0-b24c-28bf60cf9bc7",
     name: "곡류",
   },
   {
-    id: "d9434649-f177-4455-9c90-9ceabea2f6ad",
+    id: "b3796219-4b3f-4130-bf0f-1deb0feae810",
     name: "과일류",
   },
   {
-    id: "09f3161c-a29f-4258-aec2-c218ba99da46",
+    id: "d68644d7-efa3-4738-9175-8c3e2ad9daf6",
     name: "과채류",
   },
   {
-    id: "d2ca5445-d38e-40b1-8433-a50ca2d8337a",
+    id: "84a3acb4-fdc5-4718-a8f3-b1d381e09c1e",
     name: "근채류",
   },
   {
-    id: "7eb7a2a7-5e43-4dd9-9ae7-1865dc314682",
+    id: "b289363c-b29f-498c-b767-d12aa2523843",
     name: "버섯류",
   },
   {
-    id: "bc2f2bfd-9f53-4877-acd1-90346792e00c",
+    id: "eca05fa1-0c4f-43fc-aa39-0e237f443ffe",
     name: "양념류",
   },
   {
-    id: "aee5e17b-14fd-48be-be68-b697791e5d39",
+    id: "fef19348-62d0-47b5-9e7f-25fdafe59acd",
     name: "엽채류",
   },
 ];
 
 export default function Create() {
+  const router = useRouter();
   const [createProductDirect] = useMutation(CREATE_PRODUCT_DIRECT);
   const [category, setCategory] = useState("");
   const { data: DataId } = useQuery(FETCH_USER_LOGGED_IN);
   const handleChange = (value: SetStateAction<string>) => {
-    console.log(DataId);
     setCategory(value);
   };
 
@@ -51,19 +52,19 @@ export default function Create() {
     setValue("contents", value === "<p><br><p/>" ? "" : value);
     trigger("contents");
   };
-  const onClickCreate = (data: any) => {
-    const result = createProductDirect({
+  const onClickCreate = async (data: any) => {
+    const result = await createProductDirect({
       variables: {
         title: data.title,
-        content: data.content,
-        price: data.price,
-        quantity: data.quantity,
+        content: String(data.content),
+        price: Number(data.price),
+        quantity: Number(data.quantity),
         categoryId: category,
-        adminId: DataId.fetchUserLoggedIn.id,
-        // directStoreId: "aa6b3ca6-24c0-4761-bf8a-633507f71412",
+        directStoreId: DataId?.fetchUserLoggedIn.directStore.id,
       },
     });
     console.log(result);
+    router.push(`/admin_treat`);
   };
   return (
     <CreateUI

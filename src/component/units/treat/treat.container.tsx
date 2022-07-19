@@ -1,13 +1,15 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { FETCH_USER_LOGGED_IN } from "../create/create.queries";
 import AdminTreatUI from "./treat.presenter";
 import { FETCH_DIRECT_PRODUCT_BY_DIRECT_STORE_ID } from "./treat.queries";
 
 export default function AdminTreat() {
+  const { data: DataId } = useQuery(FETCH_USER_LOGGED_IN);
   const { data } = useQuery(FETCH_DIRECT_PRODUCT_BY_DIRECT_STORE_ID, {
     variables: {
-      directStoreId: "4dad258d-3530-4b2a-9b89-a4daae0163c8",
+      directStoreId: String(DataId?.fetchUserLoggedIn.directStore.id),
     },
   });
-  console.log(data);
+
   return <AdminTreatUI data={data} />;
 }

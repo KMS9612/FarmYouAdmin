@@ -7,10 +7,16 @@ export const FETCH_DIRECT_PRODUCT_BY_DIRECT_STORE_ID = gql`
       title
       content
       price
-      categoryId {
+      category {
         id
         name
       }
     }
+  }
+`;
+
+export const DELETE_PRODUCT_DIRECT = gql`
+  mutation deleteProductDirect($productId: String!) {
+    deleteProductDirect(productId: $productId)
   }
 `;

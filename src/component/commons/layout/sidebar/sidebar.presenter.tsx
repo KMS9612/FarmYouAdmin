@@ -4,7 +4,9 @@ export default function SideBarUI(props: any) {
   return (
     <S.Wrapper>
       <S.HeaderWrapper>
-        <S.Admin>LocalFood Admin</S.Admin>
+        <S.Admin>
+          <strong>{props.data?.fetchUserLoggedIn.directStore.name}</strong>Admin
+        </S.Admin>
         <S.LogOutBtn onClick={props.onClickLogout}>LogOut</S.LogOutBtn>
       </S.HeaderWrapper>
       <S.DevideLine></S.DevideLine>

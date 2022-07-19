@@ -4,7 +4,6 @@ import "react-quill/dist/quill.snow.css";
 import ButtonComponent from "../../../commons/buttons";
 import InputComponent from "../../../commons/inputs";
 import { Select } from "antd";
-import { Option } from "antd/lib/mentions";
 
 export default function CreateUI(props: any) {
   return (

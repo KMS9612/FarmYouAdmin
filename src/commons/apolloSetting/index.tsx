@@ -38,7 +38,7 @@ export default function ApolloSetting(props: IProps) {
   });
 
   const uploadLink = createUploadLink({
-    uri: "https://garbi.shop/graphql",
+    uri: "https://farmback.shop/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },
     credentials: "include",
   });

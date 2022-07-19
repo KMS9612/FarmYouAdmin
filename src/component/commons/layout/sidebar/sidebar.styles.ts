@@ -19,6 +19,7 @@ export const HeaderWrapper = styled.div`
 `;
 export const Admin = styled.div`
   font-weight: 500;
+  text-align: center;
 `;
 export const LogOutBtn = styled.button`
   background-color: #fff;
