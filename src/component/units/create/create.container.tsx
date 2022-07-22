@@ -47,6 +47,22 @@ export default function Create() {
   const handleChange = (value: SetStateAction<string>) => {
     setCategory(value);
   };
+  // 이미지 프로세스
+  const [fileUrls, setFileUrls] = useState([]);
+  function onChangeFiles(index: number, url: string) {
+    // 기존 state들을 담아줍니다.
+    const newFileUrls = [...fileUrls];
+    // 세개의 버튼 중 이미 사진이 들어있는 곳을 클릭했다면 덮어씌워줍니다.
+    if (newFileUrls[index]) {
+      newFileUrls[index] = url;
+    } else {
+      // 빈 곳이라면 맨 뒤에 추가해줍니다.
+      newFileUrls.push(url);
+    }
+    // 변경된 배열을 state에 저장해줍니다.
+    setFileUrls([...newFileUrls]);
+  }
+  console.log(fileUrls);
 
   const { handleSubmit, register, setValue, trigger } = useForm({
     mode: "onChange",
@@ -64,6 +80,9 @@ export default function Create() {
         quantity: Number(data.quantity),
         categoryId: category,
         directStoreId: DataId?.fetchUserLoggedIn.directStore.id,
+        createFileInput: {
+          imageUrl: fileUrls.join(","),
+        },
       },
     });
     console.log(result);
@@ -78,6 +97,8 @@ export default function Create() {
       handleChange={handleChange}
       CategoryList={CategoryList}
       isEdit={isEdit}
+      onChangeFiles={onChangeFiles}
+      fileUrls={fileUrls}
     />
   );
 }

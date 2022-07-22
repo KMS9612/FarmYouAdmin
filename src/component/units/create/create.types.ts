@@ -4,4 +4,5 @@ export interface IProps {
   onChangeContents: () => void;
   onClickCreate: () => void;
   isEdit: boolean;
+  onChangeFiles: () => void;
 }

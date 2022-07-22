@@ -4,6 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import ButtonComponent from "../../../commons/buttons";
 import InputComponent from "../../../commons/inputs";
 import { Select } from "antd";
+import UploadImage from "./UploadImage/UploadImage.container";
 
 export default function CreateUI(props: any) {
   return (
@@ -11,9 +12,14 @@ export default function CreateUI(props: any) {
       <S.Header>상품 {props.isEdit ? "수정" : "등록"}</S.Header>
       <S.InnerWrapper>
         <S.ImageItemWrapper>
-          <S.ImageItem>
-            <img src="/icons/write/defaultimg.png" alt="" />
-          </S.ImageItem>
+          {new Array(props.fileUrls.length + 1).fill(1).map((el, index) => (
+            <UploadImage
+              key={`${el}_${index}`}
+              index={index}
+              onChangeFiles={props.onChangeFiles}
+              fileUrls={props.fileUrls}
+            />
+          ))}
         </S.ImageItemWrapper>
         <S.CategoryWrapper>
           <S.Label>카테고리</S.Label>

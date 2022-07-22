@@ -8,6 +8,7 @@ export const CREATE_PRODUCT_DIRECT = gql`
     $quantity: Float!
     $categoryId: String!
     $directStoreId: String!
+    $createFileInput: CreateProductDirectInput
   ) {
     createProductDirect(
       title: $title
@@ -16,6 +17,7 @@ export const CREATE_PRODUCT_DIRECT = gql`
       quantity: $quantity
       categoryId: $categoryId
       directStoreId: $directStoreId
+      createFileInput: $createFileInput
     ) {
       id
     }
