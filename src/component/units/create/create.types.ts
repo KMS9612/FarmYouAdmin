@@ -3,4 +3,5 @@ export interface IProps {
   register: () => void;
   onChangeContents: () => void;
   onClickCreate: () => void;
+  isEdit: boolean;
 }

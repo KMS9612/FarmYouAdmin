@@ -8,7 +8,7 @@ import { Select } from "antd";
 export default function CreateUI(props: any) {
   return (
     <S.Wrapper onSubmit={props.handleSubmit(props.onClickCreate)}>
-      <S.Header>상품등록</S.Header>
+      <S.Header>상품 {props.isEdit ? "수정" : "등록"}</S.Header>
       <S.InnerWrapper>
         <S.ImageItemWrapper>
           <S.ImageItem>
@@ -64,7 +64,7 @@ export default function CreateUI(props: any) {
         <S.ButtonWrapper>
           <ButtonComponent
             buttonColor="#f6651e"
-            title="등록하기"
+            title={(props.isEdit && "수정하기") || "등록하기"}
             type="submit"
           />
           <ButtonComponent

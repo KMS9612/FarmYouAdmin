@@ -2,6 +2,9 @@
 import { useMutation } from "@apollo/client";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { IsEditState } from "../../../commons/store";
 import { DELETE_PRODUCT_DIRECT } from "./treat.queries";
 
 export const Wrapper = styled.div`
@@ -60,7 +63,12 @@ export const IconWrapper = styled.div`
 
 export default function TreatListItem(props: any) {
   const router = useRouter();
+  const [isEdit, setIsEdit] = useRecoilState(IsEditState);
   const [deleteProductDirect] = useMutation(DELETE_PRODUCT_DIRECT);
+  const onClickEdit = () => {
+    router.push(`/admin_create`);
+    setIsEdit(true);
+  };
   const onClickDelete = () => {
     try {
       deleteProductDirect({
@@ -80,7 +88,11 @@ export default function TreatListItem(props: any) {
       <TablePrice>{props.el.price} 원</TablePrice>
       <TableIcons>
         <IconWrapper>
-          <Img src="/icons/treat/AdminEdit.png" alt="수정버튼"></Img>
+          <Img
+            onClick={onClickEdit}
+            src="/icons/treat/AdminEdit.png"
+            alt="수정버튼"
+          ></Img>
           <Img
             onClick={onClickDelete}
             src="/icons/treat/AdminDelete.png"

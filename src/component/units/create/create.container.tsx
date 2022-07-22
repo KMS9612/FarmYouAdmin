@@ -2,6 +2,8 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { IsEditState } from "../../../commons/store";
 import CreateUI from "./create.presenter";
 import { CREATE_PRODUCT_DIRECT, FETCH_USER_LOGGED_IN } from "./create.queries";
 
@@ -39,6 +41,7 @@ const CategoryList = [
 export default function Create() {
   const router = useRouter();
   const [createProductDirect] = useMutation(CREATE_PRODUCT_DIRECT);
+  const [isEdit, setIsEdit] = useRecoilState(IsEditState);
   const [category, setCategory] = useState("");
   const { data: DataId } = useQuery(FETCH_USER_LOGGED_IN);
   const handleChange = (value: SetStateAction<string>) => {
@@ -74,6 +77,7 @@ export default function Create() {
       onClickCreate={onClickCreate}
       handleChange={handleChange}
       CategoryList={CategoryList}
+      isEdit={isEdit}
     />
   );
 }
