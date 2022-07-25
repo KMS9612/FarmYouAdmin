@@ -1,11 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import { IsEditState } from "../../../commons/store";
-import CreateUI from "./create.presenter";
-import { CREATE_PRODUCT_DIRECT, FETCH_USER_LOGGED_IN } from "./create.queries";
+import { IsEditState } from "../../../../commons/store";
+import EditUI from "./Edit.presenter";
+
+import {
+  FETCH_PRODUCT_DIRECT,
+  FETCH_USER_LOGGED_IN,
+  UPDATE_PRODUCT_DIRECT,
+} from "./Edit.queries";
 
 const CategoryList = [
   {
@@ -38,12 +44,23 @@ const CategoryList = [
   },
 ];
 
-export default function Create() {
+export default function Edit() {
   const router = useRouter();
-  const [createProductDirect] = useMutation(CREATE_PRODUCT_DIRECT);
+
+  const [isEdit, setIsEdit] = useRecoilState(IsEditState);
 
   const [category, setCategory] = useState("");
+  const [updateProductDirect] = useMutation(UPDATE_PRODUCT_DIRECT);
   const { data: DataId } = useQuery(FETCH_USER_LOGGED_IN);
+  const { data: DataItem, loading } = useQuery(FETCH_PRODUCT_DIRECT, {
+    variables: {
+      productId: router.query.directId,
+    },
+  });
+  useEffect(() => {
+    setFileUrls(DataItem?.fetchProductDirect.files[0].url?.split(",") || []);
+  }, []);
+
   const handleChange = (value: SetStateAction<string>) => {
     setCategory(value);
   };
@@ -62,7 +79,6 @@ export default function Create() {
     // 변경된 배열을 state에 저장해줍니다.
     setFileUrls([...newFileUrls]);
   }
-  console.log(fileUrls);
 
   const { handleSubmit, register, setValue, trigger } = useForm({
     mode: "onChange",
@@ -72,33 +88,51 @@ export default function Create() {
     trigger("contents");
     console.log(value);
   };
-  const onClickCreate = async (data: any) => {
-    const result = await createProductDirect({
+
+  const onClickUpdate = async (data: any) => {
+    const Update = await updateProductDirect({
       variables: {
-        title: data.title,
-        content: data.contents,
-        price: Number(data.price),
-        quantity: Number(data.quantity),
-        categoryId: category,
-        directStoreId: DataId?.fetchUserLoggedIn.directStore.id,
+        productId: router.query.directId,
+        title:
+          data.title === "" ? DataItem?.fetchProductDirect.title : data.title,
+        content:
+          data.content === "<p><br><p/>"
+            ? String(DataItem?.fetchProductDirect.content)
+            : String(data.content),
+        price:
+          data.price === ""
+            ? Number(DataItem?.fetchProductDirect.price)
+            : Number(data.price),
+        quantity:
+          data.quantity === ""
+            ? Number(DataItem?.fetchProductDirect.quantity)
+            : Number(data.quantity),
+        category:
+          category === ""
+            ? DataItem?.fetchProductDirect.category.name
+            : category,
         createFileInput: {
           imageUrl: fileUrls.join(","),
         },
       },
     });
-    console.log(result);
-    router.push(`/admin_treat`);
+    console.log(Update);
   };
-  return (
-    <CreateUI
+
+  return loading ? (
+    ""
+  ) : (
+    <EditUI
       handleSubmit={handleSubmit}
       register={register}
       onChangeContents={onChangeContents}
-      onClickCreate={onClickCreate}
+      onClickUpdate={onClickUpdate}
       handleChange={handleChange}
       CategoryList={CategoryList}
+      isEdit={isEdit}
       onChangeFiles={onChangeFiles}
       fileUrls={fileUrls}
+      DataItem={DataItem}
     />
   );
 }

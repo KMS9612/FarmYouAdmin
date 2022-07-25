@@ -2,7 +2,7 @@
 import { useMutation } from "@apollo/client";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { IsEditState } from "../../../commons/store";
 import { DELETE_PRODUCT_DIRECT } from "./treat.queries";
@@ -65,8 +65,8 @@ export default function TreatListItem(props: any) {
   const router = useRouter();
   const [isEdit, setIsEdit] = useRecoilState(IsEditState);
   const [deleteProductDirect] = useMutation(DELETE_PRODUCT_DIRECT);
-  const onClickEdit = () => {
-    router.push(`/admin_create`);
+  const onClickEdit = (event: any) => {
+    router.push(`/admin_create/${event.target.id}`);
     setIsEdit(true);
   };
   const onClickDelete = () => {
@@ -89,6 +89,7 @@ export default function TreatListItem(props: any) {
       <TableIcons>
         <IconWrapper>
           <Img
+            id={props.el.id}
             onClick={onClickEdit}
             src="/icons/treat/AdminEdit.png"
             alt="수정버튼"

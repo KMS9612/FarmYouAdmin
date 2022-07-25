@@ -5,7 +5,7 @@ interface IInputProps {
   placeholder: string | undefined;
   disabled?: boolean;
   type?: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
   readOnly?: boolean;
   register?: object;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void | undefined;

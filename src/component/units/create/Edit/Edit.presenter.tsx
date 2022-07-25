@@ -1,15 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import * as S from "./create.styles";
+import * as S from "./Edit.styles";
 import "react-quill/dist/quill.snow.css";
-import ButtonComponent from "../../../commons/buttons";
-import InputComponent from "../../../commons/inputs";
 import { Select } from "antd";
-import UploadImage from "./UploadImage/UploadImage.container";
+import UploadImage from "../UploadImage/UploadImage.container";
+import InputComponent from "../../../../commons/inputs";
+import ButtonComponent from "../../../../commons/buttons";
+import { IProps } from "./Edit.types";
 
-export default function CreateUI(props: any) {
+export default function EditUI(props: IProps) {
   return (
-    <S.Wrapper onSubmit={props.handleSubmit(props.onClickCreate)}>
-      <S.Header>상품 등록</S.Header>
+    <S.Wrapper onSubmit={props.handleSubmit(props.onClickUpdate)}>
+      <S.Header>상품 수정</S.Header>
       <S.InnerWrapper>
         <S.ImageItemWrapper>
           {new Array(props.fileUrls.length + 1).fill(1).map((el, index) => (
@@ -18,6 +19,7 @@ export default function CreateUI(props: any) {
               index={index}
               onChangeFiles={props.onChangeFiles}
               fileUrls={props.fileUrls}
+              DataItem={props.DataItem}
             />
           ))}
         </S.ImageItemWrapper>
@@ -26,10 +28,10 @@ export default function CreateUI(props: any) {
           <Select
             onChange={props.handleChange}
             style={{ width: "25%" }}
-            defaultValue="카테고리를 선택하세요"
+            defaultValue={props.DataItem?.fetchProductDirect.category.name}
           >
             {props.CategoryList.map((el: any, index: number) => (
-              <Select.Option key={index} value={el.id}>
+              <Select.Option key={index} value={el.name}>
                 {el.name}
               </Select.Option>
             ))}
@@ -40,31 +42,37 @@ export default function CreateUI(props: any) {
           placeholder={"상품명을 입력해주세요"}
           type={"text"}
           register={props.register("title")}
+          defaultValue={props.DataItem?.fetchProductDirect.title}
         />
         <S.FormWrapper>
           <S.InputWrapper>
             <S.Label>상품가격</S.Label>
             <InputComponent
               placeholder={"가격을 입력해주세요"}
-              type={"text"}
+              type={"string"}
               register={props.register("price")}
+              defaultValue={props.DataItem?.fetchProductDirect.price}
             />
           </S.InputWrapper>
           <S.InputWrapper>
             <S.Label>상품 총 수량</S.Label>
             <InputComponent
-              placeholder={"수량을 입력해주세요"}
-              type={"text"}
+              placeholder={"100"}
+              type={"string"}
               register={props.register("quantity")}
+              defaultValue={props.DataItem?.fetchProductDirect.quantity}
             />
           </S.InputWrapper>
         </S.FormWrapper>
         <S.Label>상품설명</S.Label>
-        <S.InputQuill onChange={props.onChangeContents} />
+        <S.InputQuill
+          onChange={props.onChangeContents}
+          defaultValue={props.DataItem?.fetchProductDirect.content}
+        />
         <S.ButtonWrapper>
           <ButtonComponent
             buttonColor="#f6651e"
-            title={(props.isEdit && "수정하기") || "등록하기"}
+            title="수정하기"
             type="submit"
           />
           <ButtonComponent

@@ -40,6 +40,7 @@ export default function UploadImage(props: IUploadsImageProps) {
       fileUrl={props.fileUrls[props.index]}
       onClickUpload={onClickUpload}
       onChangeFile={onChangeFile}
+      DataItem={props.DataItem}
     />
   );
 }
