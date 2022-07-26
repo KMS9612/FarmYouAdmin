@@ -7,7 +7,7 @@ export const UPDATE_PRODUCT_DIRECT = gql`
     $content: String!
     $price: Float!
     $quantity: Float!
-    $category: String!
+    $categoryId: String!
     $createFileInput: CreateProductDirectInput
   ) {
     updateProductDirect(
@@ -15,11 +15,12 @@ export const UPDATE_PRODUCT_DIRECT = gql`
       content: $content
       price: $price
       quantity: $quantity
-      category: $category
+      categoryId: $categoryId
       productId: $productId
       createFileInput: $createFileInput
     ) {
       id
+      content
     }
   }
 `;

@@ -6,8 +6,14 @@ import UploadImage from "../UploadImage/UploadImage.container";
 import InputComponent from "../../../../commons/inputs";
 import ButtonComponent from "../../../../commons/buttons";
 import { IProps } from "./Edit.types";
+import { useEffect } from "react";
 
 export default function EditUI(props: IProps) {
+  useEffect(() => {
+    props.setFileUrls(
+      props.DataItem?.fetchProductDirect.files[0].url?.split(",") || []
+    );
+  }, []);
   return (
     <S.Wrapper onSubmit={props.handleSubmit(props.onClickUpdate)}>
       <S.Header>상품 수정</S.Header>
@@ -79,6 +85,7 @@ export default function EditUI(props: IProps) {
             buttonColor="#BDBDBD"
             title="이전으로"
             type="button"
+            onClick={props.onClickMove(`/admin_treat`)}
           />
         </S.ButtonWrapper>
       </S.InnerWrapper>

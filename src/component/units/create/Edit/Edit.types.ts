@@ -1,4 +1,4 @@
-import { SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import {
   FieldValues,
   UseFormHandleSubmit,
@@ -16,6 +16,8 @@ export interface IProps {
   onChangeFiles: (index: number, url: string) => void;
   DataItem: IDataItem;
   fileUrls: any[];
+  setFileUrls: Dispatch<SetStateAction<any[]>>;
+  onClickMove: (move: string) => () => void;
 }
 
 export interface IDataItem {

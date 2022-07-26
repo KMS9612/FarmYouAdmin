@@ -15,7 +15,7 @@ export default function Home() {
   const [accessToken, setAccessToken] = useRecoilState(TokenState);
   const router = useRouter();
   const [loginAdmin] = useMutation(LOGIN_ADMIN);
-  console.log(accessToken);
+
   const onClickLogin = async (data) => {
     try {
       const result = await loginAdmin({

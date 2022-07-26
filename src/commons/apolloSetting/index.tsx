@@ -27,7 +27,7 @@ export default function ApolloSetting(props: IProps) {
             operation.setContext({
               headers: {
                 ...operation.getContext().headers,
-                Authorization: `Bearer ${newAccessToken}`,
+                Authorization: `Bearer ${accessToken}`,
               },
             });
             return forward(operation);

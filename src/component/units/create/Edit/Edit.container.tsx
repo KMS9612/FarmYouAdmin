@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -57,9 +58,6 @@ export default function Edit() {
       productId: router.query.directId,
     },
   });
-  useEffect(() => {
-    setFileUrls(DataItem?.fetchProductDirect.files[0].url?.split(",") || []);
-  }, []);
 
   const handleChange = (value: SetStateAction<string>) => {
     setCategory(value);
@@ -90,39 +88,48 @@ export default function Edit() {
   };
 
   const onClickUpdate = async (data: any) => {
-    const Update = await updateProductDirect({
-      variables: {
-        productId: router.query.directId,
-        title:
-          data.title === "" ? DataItem?.fetchProductDirect.title : data.title,
-        content:
-          data.content === "<p><br><p/>"
-            ? String(DataItem?.fetchProductDirect.content)
-            : String(data.content),
-        price:
-          data.price === ""
-            ? Number(DataItem?.fetchProductDirect.price)
-            : Number(data.price),
-        quantity:
-          data.quantity === ""
-            ? Number(DataItem?.fetchProductDirect.quantity)
-            : Number(data.quantity),
-        category:
-          category === ""
-            ? DataItem?.fetchProductDirect.category.name
-            : category,
-        createFileInput: {
-          imageUrl: fileUrls.join(","),
+    try {
+      const Update = await updateProductDirect({
+        variables: {
+          productId: router.query.directId,
+          title:
+            data.title === "" ? DataItem?.fetchProductDirect.title : data.title,
+          content:
+            data.content === ""
+              ? DataItem?.fetchProductDirect.content
+              : String(data.contents),
+          price:
+            data.price === ""
+              ? Number(DataItem?.fetchProductDirect.price)
+              : Number(data.price),
+          quantity:
+            data.quantity === ""
+              ? Number(DataItem?.fetchProductDirect.quantity)
+              : Number(data.quantity),
+          categoryId:
+            category === ""
+              ? DataItem?.fetchProductDirect.category.id
+              : category,
+          createFileInput: {
+            imageUrl: fileUrls.join(","),
+          },
         },
-      },
-    });
-    console.log(Update);
+      });
+      router.push(`/admin_treat`);
+      console.log(Update);
+    } catch (e) {
+      Modal.error({ content: "수정에 실패했습니다." });
+    }
   };
-
+  const onClickMove = (move: string) => () => {
+    router.push(move);
+  };
   return loading ? (
     ""
   ) : (
     <EditUI
+      onClickMove={onClickMove}
+      setFileUrls={setFileUrls}
       handleSubmit={handleSubmit}
       register={register}
       onChangeContents={onChangeContents}
