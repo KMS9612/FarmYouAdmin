@@ -28,14 +28,34 @@ export const TableAddress = styled.div`
   width: 20%;
   text-align: center;
 `;
+interface IPropsOrder {
+  data: IDataPayment;
+  el: any;
+}
 
-export default function OrderListItem() {
+interface IDataPayment {
+  fetchCompletedPaymentsForAdmin: {
+    map(arg0: (el: any, index: any) => any): import("react").ReactNode;
+    id: string;
+    amount: number;
+    productDirect: {
+      id: string;
+      title: string;
+      users: {
+        id: string;
+        name: string;
+      };
+    };
+  };
+}
+
+export default function OrderListItem(props: IPropsOrder) {
   return (
     <Table>
-      <TableName>주문 고객</TableName>
-      <TableProduct>주문 상품</TableProduct>
-      <TableCount>수량</TableCount>
-      <TableAddress>배송지</TableAddress>
+      <TableName>{props.el.user.name}</TableName>
+      <TableProduct>{props.el.productDirect.title}</TableProduct>
+      <TableCount>{props.el.productDirect.quantity}</TableCount>
+      <TableAddress>{props.el.user.address.address}</TableAddress>
     </Table>
   );
 }

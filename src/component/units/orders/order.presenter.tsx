@@ -1,7 +1,8 @@
 import * as S from "./order.styles";
+import { IPropsOrder } from "./order.types";
 import OrderListItem from "./orderListItem";
 
-export default function AdminOrderUI() {
+export default function AdminOrderUI(props: IPropsOrder) {
   return (
     <S.Wrapper>
       <S.Header>주문내역</S.Header>
@@ -11,7 +12,9 @@ export default function AdminOrderUI() {
         <S.TableCount>수량</S.TableCount>
         <S.TableAddress>배송지</S.TableAddress>
       </S.Table>
-      <OrderListItem />
+      {props.data?.fetchCompletedPaymentsForAdmin.map((el, index) => (
+        <OrderListItem data={props.data} key={`${el}_${index}`} el={el} />
+      ))}
     </S.Wrapper>
   );
 }
