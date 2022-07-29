@@ -12,5 +12,4 @@ export interface IUploadsImageProps {
   fileUrls: string[];
   index: number;
   onChangeFiles: (index: number, result: string) => void;
-  DataItem: any;
 }

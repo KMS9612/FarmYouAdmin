@@ -13,7 +13,12 @@ export default function AdminOrderUI(props: IPropsOrder) {
         <S.TableAddress>배송지</S.TableAddress>
       </S.Table>
       {props.data?.fetchCompletedPaymentsForAdmin.map((el, index) => (
-        <OrderListItem data={props.data} key={`${el}_${index}`} el={el} />
+        <OrderListItem
+          data={props.data}
+          key={`${el}_${index}`}
+          el={el}
+          index={index}
+        />
       ))}
     </S.Wrapper>
   );

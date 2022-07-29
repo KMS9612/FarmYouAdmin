@@ -31,6 +31,7 @@ export const TableAddress = styled.div`
 interface IPropsOrder {
   data: IDataPayment;
   el: any;
+  index: number;
 }
 
 interface IDataPayment {
@@ -54,8 +55,11 @@ export default function OrderListItem(props: IPropsOrder) {
     <Table>
       <TableName>{props.el.user.name}</TableName>
       <TableProduct>{props.el.productDirect.title}</TableProduct>
-      <TableCount>{props.el.productDirect.quantity}</TableCount>
-      <TableAddress>{props.el.user.address.address}</TableAddress>
+      <TableCount>{props.el.quantity}</TableCount>
+      <TableAddress>
+        {props.el.user.address[0]?.address +
+          props.el.user.address[0]?.detailedAddress}
+      </TableAddress>
     </Table>
   );
 }

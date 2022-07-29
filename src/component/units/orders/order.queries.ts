@@ -5,10 +5,10 @@ export const FETCH_COMPLETE_PAYMENTS_FOR_ADMIN = gql`
     fetchCompletedPaymentsForAdmin(adminId: $adminId) {
       id
       amount
+      quantity
       productDirect {
         id
         title
-        quantity
       }
       user {
         id

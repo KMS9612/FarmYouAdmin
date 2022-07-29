@@ -5,6 +5,7 @@ import ButtonComponent from "../../../commons/buttons";
 import InputComponent from "../../../commons/inputs";
 import { Select } from "antd";
 import UploadImage from "./UploadImage/UploadImage.container";
+import ReactQuillContainer from "../../commons/quill";
 
 export default function CreateUI(props: any) {
   return (
@@ -60,7 +61,10 @@ export default function CreateUI(props: any) {
           </S.InputWrapper>
         </S.FormWrapper>
         <S.Label>상품설명</S.Label>
-        <S.InputQuill onChange={props.onChangeContents} />
+        <ReactQuillContainer
+          getValues={props.getValues}
+          onChangeContent={props.onChangeContents}
+        />
         <S.ButtonWrapper>
           <ButtonComponent
             buttonColor="#f6651e"

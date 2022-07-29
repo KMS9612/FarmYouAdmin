@@ -1,9 +1,9 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState } from "recoil";
-import { IsEditState } from "../../../commons/store";
+
 import CreateUI from "./create.presenter";
 import { CREATE_PRODUCT_DIRECT, FETCH_USER_LOGGED_IN } from "./create.queries";
 
@@ -64,7 +64,7 @@ export default function Create() {
   }
   console.log(fileUrls);
 
-  const { handleSubmit, register, setValue, trigger } = useForm({
+  const { handleSubmit, register, setValue, trigger, getValues } = useForm({
     mode: "onChange",
   });
   const onChangeContents = (value: string) => {
@@ -73,6 +73,10 @@ export default function Create() {
     console.log(value);
   };
   const onClickCreate = async (data: any) => {
+    if (fileUrls.join(",") === "") {
+      Modal.error({ content: "이미지를 첨부해주세요!" });
+      return;
+    }
     const result = await createProductDirect({
       variables: {
         title: data.title,
@@ -99,6 +103,7 @@ export default function Create() {
       CategoryList={CategoryList}
       onChangeFiles={onChangeFiles}
       fileUrls={fileUrls}
+      getValues={getValues}
     />
   );
 }
