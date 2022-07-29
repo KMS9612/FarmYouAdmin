@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 import { TokenState } from "../store";
 import { onError } from "@apollo/client/link/error";
 import { getAccessToken } from "../lib/getAccessToken";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 interface IProps {
   children: ReactNode;
@@ -17,6 +17,12 @@ interface IProps {
 
 export default function ApolloSetting(props: IProps) {
   const [accessToken, setAccessToken] = useRecoilState(TokenState);
+
+  useEffect(() => {
+    getAccessToken().then((newAccessToken) => {
+      setAccessToken(newAccessToken);
+    });
+  });
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
