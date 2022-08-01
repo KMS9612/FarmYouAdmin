@@ -45,7 +45,7 @@ const CategoryList = [
   },
 ];
 
-export default function Edit() {
+export default function Edit(): any {
   const router = useRouter();
 
   const [isEdit, setIsEdit] = useRecoilState(IsEditState);
