@@ -19,6 +19,7 @@ export default function CreateUI(props: any) {
               index={index}
               onChangeFiles={props.onChangeFiles}
               fileUrls={props.fileUrls}
+              DataItem={undefined}
             />
           ))}
         </S.ImageItemWrapper>

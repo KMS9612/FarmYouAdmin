@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  farmyou:
+  farmyouadmin:
     build:
       context: .
       dockerfile: Dockerfile
