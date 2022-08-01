@@ -1,9 +1,10 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
-
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import CreateUI from "./create.presenter";
 import { CREATE_PRODUCT_DIRECT, FETCH_USER_LOGGED_IN } from "./create.queries";
 
@@ -62,9 +63,16 @@ export default function Create() {
     // 변경된 배열을 state에 저장해줍니다.
     setFileUrls([...newFileUrls]);
   }
-  console.log(fileUrls);
+  const schema = yup.object({
+    title: yup.string().required("필수입력사항입니다."),
+    price: yup.number().required("필수입력사항입니다."),
+    quantity: yup.number().required("필수입력사항입니다."),
+    origin: yup.string().required("필수입력사항입니다."),
+    contents: yup.string().required("필수입력사항입니다."),
+  });
 
   const { handleSubmit, register, setValue, trigger, getValues } = useForm({
+    resolver: yupResolver(schema),
     mode: "onChange",
   });
   const onChangeContents = (value: string) => {

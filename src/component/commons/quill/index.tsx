@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from "@apollo/client";
 import { AxiosError } from "axios";
 import dynamic from "next/dynamic";
@@ -40,7 +41,7 @@ const formats = [
 
 interface IData {
   title: string;
-  content: string;
+  contents: string;
   price: number;
   quantity: number;
   origin: string;
@@ -57,7 +58,6 @@ function ReactQuillContainer(props: IProps) {
 
   // 이미지를 업로드 하기 위한 함수
   const imageHandler = () => {
-    // if (typeof document !== "undefined") {
     const input = document.createElement("input");
     // 파일을 업로드 하기 위한 input 태그 생성
     const formData = new FormData();
@@ -69,9 +69,13 @@ function ReactQuillContainer(props: IProps) {
 
     // 파일이 input 태그에 담기면 실행 될 함수
     input.onchange = async () => {
+      console.log(props.getValues("contents"));
       const file = input.files;
+      console.log(file);
+      console.log(props.getValues("contents"));
       if (file !== null) {
         formData.append("image", file[0]);
+        console.log(props.getValues("contents"));
 
         try {
           // const res = axios를 통해 백엔드 개발자분과 통신했고, 데이터는 폼데이터로 주고받았습니다.
@@ -80,10 +84,12 @@ function ReactQuillContainer(props: IProps) {
               files: file,
             },
           });
+          console.log(props.getValues("contents"));
 
           // 백엔드 개발자 분이 통신 성공시에 보내주는 이미지 url을 변수에 담는다.
 
           url = result.data.uploadFile[0];
+          console.log(props.getValues("contents"));
 
           // 커서의 위치를 알고 해당 위치에 이미지 태그를 넣어주는 코드
           // 해당 DOM의 데이터가 필요하기에 useRef를 사용한다.
@@ -94,20 +100,16 @@ function ReactQuillContainer(props: IProps) {
 
           if (range !== null && range !== undefined) {
             const quill = QuillRef.current?.getEditor();
-
             quill?.setSelection(range, 1);
 
             quill?.clipboard.dangerouslyPasteHTML(
               range,
               `<img src="https://storage.googleapis.com/${url}"/>`
             );
-
-            console.log(quill);
           }
 
           return { ...result, success: true };
         } catch (error) {
-          console.log(error);
           const err = error as AxiosError;
           return { ...err.response, success: false };
         }
@@ -144,7 +146,7 @@ function ReactQuillContainer(props: IProps) {
       placeholder="본문을 입력하세요..."
       modules={modules}
       formats={formats}
-      value={props.getValues("content") || ""}
+      value={props.getValues("contents") || ""}
       onChange={props.onChangeContent}
     />
   );

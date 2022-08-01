@@ -83,9 +83,9 @@ export default function TreatListItem(props: any) {
   };
   return (
     <Table>
-      <TableCate>{props.el.category.name}</TableCate>
-      <TableProduct>{props.el.title}</TableProduct>
-      <TablePrice>{props.el.price} 원</TablePrice>
+      <TableCate>{props.el?.category.name}</TableCate>
+      <TableProduct>{props.el?.title}</TableProduct>
+      <TablePrice>{props.el?.price} 원</TablePrice>
       <TableIcons>
         <IconWrapper>
           <Img
