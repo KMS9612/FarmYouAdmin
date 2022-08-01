@@ -4,9 +4,10 @@ export default function SideBarUI(props: any) {
   return (
     <S.Wrapper>
       <S.HeaderWrapper>
-        <S.Admin>
-          <strong>{props.data?.fetchUserLoggedIn.directStore.name}</strong>Admin
-        </S.Admin>
+        <div style={{ width: "80%", textAlign: "center" }}>
+          <strong>{props.data?.fetchUserLoggedIn.directStore.name}</strong>
+        </div>
+        <S.Admin>Admin</S.Admin>
         <S.LogOutBtn onClick={props.onClickLogout}>LogOut</S.LogOutBtn>
       </S.HeaderWrapper>
       <S.DevideLine></S.DevideLine>
