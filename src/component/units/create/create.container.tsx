@@ -63,16 +63,8 @@ export default function Create() {
     // 변경된 배열을 state에 저장해줍니다.
     setFileUrls([...newFileUrls]);
   }
-  const schema = yup.object({
-    title: yup.string().required("필수입력사항입니다."),
-    price: yup.number().required("필수입력사항입니다."),
-    quantity: yup.number().required("필수입력사항입니다."),
-    origin: yup.string().required("필수입력사항입니다."),
-    contents: yup.string().required("필수입력사항입니다."),
-  });
 
   const { handleSubmit, register, setValue, trigger, getValues } = useForm({
-    resolver: yupResolver(schema),
     mode: "onChange",
   });
   const onChangeContents = (value: string) => {
