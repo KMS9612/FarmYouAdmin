@@ -84,7 +84,6 @@ export default function Edit(): any {
   const onChangeContents = (value: string) => {
     setValue("contents", value === "<p><br><p/>" ? "" : value);
     trigger("contents");
-    console.log(value);
   };
 
   const onClickUpdate = async (data: any) => {
@@ -116,7 +115,6 @@ export default function Edit(): any {
         },
       });
       router.push(`/admin_treat`);
-      console.log(Update);
     } catch (e) {
       Modal.error({ content: "수정에 실패했습니다." });
     }

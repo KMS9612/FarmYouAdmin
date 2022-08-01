@@ -78,7 +78,6 @@ export default function Create() {
   const onChangeContents = (value: string) => {
     setValue("contents", value === "<p><br><p/>" ? "" : value);
     trigger("contents");
-    console.log(value);
   };
   const onClickCreate = async (data: any) => {
     if (fileUrls.join(",") === "") {
@@ -98,7 +97,6 @@ export default function Create() {
         },
       },
     });
-    console.log(result);
     router.push(`/admin_treat`);
   };
   return (

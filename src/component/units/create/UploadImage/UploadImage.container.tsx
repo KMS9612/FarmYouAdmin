@@ -24,7 +24,6 @@ export default function UploadImage(props: IUploadsImageProps) {
           files: file,
         },
       });
-      console.log(result.data.uploadFile[0]);
       props.onChangeFiles(props.index, result.data?.uploadFile[0]);
     } catch (error) {
       Modal.error({

@@ -10,7 +10,6 @@ export default function AdminTreat() {
       directStoreId: String(DataId?.fetchUserLoggedIn.directStore.id),
     },
   });
-  console.log(data);
 
   return <AdminTreatUI data={data} />;
 }

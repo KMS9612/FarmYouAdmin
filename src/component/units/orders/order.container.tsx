@@ -11,6 +11,5 @@ export default function AdminOrder() {
       adminId: String(DataId?.fetchUserLoggedIn.id),
     },
   });
-  console.log(data);
   return <AdminOrderUI data={data} />;
 }

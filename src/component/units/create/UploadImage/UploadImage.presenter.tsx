@@ -4,7 +4,6 @@ import { IUploadsImageUIProps } from "./UploadImage.types";
 
 export default function UploadsImageUI(props: IUploadsImageUIProps) {
   const imgs = props.DataItem?.fetchProductDirect.files.url;
-  console.log(imgs);
   return (
     <>
       {props.fileUrl ? (
