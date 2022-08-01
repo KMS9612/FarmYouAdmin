@@ -1,7 +1,7 @@
 FROM node:16
 
-WORKDIR /farmyou_admin/
-COPY . /farmyou_admin/
+WORKDIR /FarmYouAdmin/
+COPY . /FarmYouAdmin/
 
 RUN yarn install
 RUN yarn build
