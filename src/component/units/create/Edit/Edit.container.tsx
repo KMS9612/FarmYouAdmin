@@ -16,31 +16,31 @@ import {
 
 const CategoryList = [
   {
-    id: "44cc4424-eb4c-4da0-b24c-28bf60cf9bc7",
+    id: "40c5c645-66c8-462c-986c-75b401126656",
     name: "곡류",
   },
   {
-    id: "b3796219-4b3f-4130-bf0f-1deb0feae810",
+    id: "2144df70-c36d-45fc-904e-d790d5631d25",
     name: "과일류",
   },
   {
-    id: "d68644d7-efa3-4738-9175-8c3e2ad9daf6",
+    id: "d30bfec3-09fe-4d53-b821-65ec53781b07",
     name: "과채류",
   },
   {
-    id: "84a3acb4-fdc5-4718-a8f3-b1d381e09c1e",
+    id: "d7ac5587-5aa9-4d37-a515-f8f8e6ba9dab",
     name: "근채류",
   },
   {
-    id: "b289363c-b29f-498c-b767-d12aa2523843",
+    id: "f7018fb6-dcd9-474e-93a0-b23e4267adc5",
     name: "버섯류",
   },
   {
-    id: "eca05fa1-0c4f-43fc-aa39-0e237f443ffe",
+    id: "ef426836-02ae-46d8-a715-d71ad1af1ba3",
     name: "양념류",
   },
   {
-    id: "fef19348-62d0-47b5-9e7f-25fdafe59acd",
+    id: "0c66bf51-5766-46d4-8eef-52f6bddba181",
     name: "엽채류",
   },
 ];
